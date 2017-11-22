@@ -1,6 +1,6 @@
 language: python
-architecture: x86_64
-os: Ubuntu_16.04
+#architecture: x86_64
+#os: Ubuntu_16.04
 python:
   - 2.7
 
@@ -12,12 +12,3 @@ build:
   #  - sleep 15m
   ci:
     - python -v
-
-
-
-
-
-
-
-
-
