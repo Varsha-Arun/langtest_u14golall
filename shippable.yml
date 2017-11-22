@@ -5,6 +5,9 @@ python:
   - 2.7
 
 build:
+  pre_ci:
+    - echo "hello"
+    
   pre_ci_boot:
     image_name: drydockaarch64/u16pyt
     image_tag: master
@@ -12,3 +15,59 @@ build:
   #  - sleep 15m
   ci:
     - python -v
+  
+  post_ci:
+    - echo "done"
+    
+integrations:
+  hub: 
+    - integrationName: docker
+      type: docker 
+      
+  notifications:  
+    - integrationName: email
+      type: email
+      recipients: 
+        - shiptest.rc.me@gmail.com
+        - shiptest.rc.ow@gmail.com
+      sendConsoleLogs : true
+      sendCoverageReports : true
+      on_success: always
+      on_failure: always
+      on_pull_request: always
+      on_cancel: always
+      
+    - integrationName: slack 
+      type: slack
+      recipients:
+        - "#random" 
+        - "#rc-public" 
+        - "#rc-private"
+      on_success: always
+      on_failure: always
+      on_pull_request: always
+      on_cancel: always
+      
+    - integrationName: irc    
+      type: irc
+      recipients:
+        - "chat.freenode.net#test-rc"
+        - "webchat.irchighway.net#irc-three"
+      on_success: always
+      on_failure: always
+      on_pull_request: always
+      on_cancel: always  
+ 
+    - integrationName: hipchat
+      type: hipchat
+      recipients:
+        - '#rc-private'
+        - '#rc-public'
+        - '@shiptestrcow'
+        - '@shiptest'
+      on_success: always
+      on_failure: always
+      on_pull_request: always  
+      
+   #   on_cancel: always
+   
